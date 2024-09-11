@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body {
+  background-color: white;
+  color: black;
+  font-family: Verdana;
+}
+
+.main-div {
+  display: flex;
+  height: 10px;
+  background-color: blue;
+}
+
+.left-div {
+  background-color: red;
+  height: 20px;
+  flex-grow: 1;
+}
+
+.middle-div {
+  background-color: teal;
+  height: 20px;
+  flex-grow: 2;
+}
+
+.right-div {
+  background-color: green;
+  height: 20px;
+  flex-grow: 1;
+}
+
+.middle-header {
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.middle-paragraph {
+  width: 100%;
+}
+
+/* --- Fonts --- */
+
+.koho-extralight {
+  font-family: "KoHo", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.koho-light {
+  font-family: "KoHo", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.koho-regular {
+  font-family: "KoHo", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.koho-medium {
+  font-family: "KoHo", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.koho-semibold {
+  font-family: "KoHo", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.koho-bold {
+  font-family: "KoHo", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.koho-extralight-italic {
+  font-family: "KoHo", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.koho-light-italic {
+  font-family: "KoHo", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.koho-regular-italic {
+  font-family: "KoHo", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.koho-medium-italic {
+  font-family: "KoHo", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.koho-semibold-italic {
+  font-family: "KoHo", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.koho-bold-italic {
+  font-family: "KoHo", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
