@@ -9,13 +9,13 @@ body {
   padding: 1.5em 2em;
 }
 
-body p {
+body p,
+h1,
+h2,
+ul {
   margin: 0;
 }
 
-body h1 {
-  margin: 0;
-}
 
 /* --- */
 
@@ -27,13 +27,20 @@ body h1 {
 /* --- */
 
 .left-div {
-  height: 20px;
-  flex-basis: 25%;
+  flex-basis: 30%;
 }
 
 .nav-menu {
-  height: 5em;
+  padding: 0.6em 0.8em 1em 0.8em;
   border: 1px solid black;
+}
+
+.nav-menu ul {
+  padding-left: 1.5em;
+}
+
+.nav-menu li {
+  list-style: square outside;
 }
 
 /* --- middle --- */
@@ -53,20 +60,20 @@ body h1 {
   border: 1px solid black;
 }
 
+.middle-text {
+  font-size: large;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 1.5em 1em;
+  text-wrap: stable;
+}
+
 /* --- right --- */
 
 .right-div {
   background-color: green;
   height: 20px;
   flex-basis: 25%;
-}
-
-.middle-paragraph {
-  font-size: large;
-  border: 1px solid black;
-  box-sizing: border-box;
-  padding: 1.5em 1em;
-  text-wrap: stable;
 }
 
 /* --- fonts --- */
