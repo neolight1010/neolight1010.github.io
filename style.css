@@ -71,9 +71,14 @@ ul {
 /* --- right --- */
 
 .right-div {
-  background-color: green;
-  height: 20px;
   flex-basis: 25%;
+}
+
+.right-img {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1em;
+  border: 1px solid black;
 }
 
 /* --- fonts --- */
