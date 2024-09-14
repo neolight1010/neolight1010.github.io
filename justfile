@@ -1,14 +1,7 @@
-default: build
+default: serve
 
-build: clean
-    mkdir dist/
-    cp -r src/* dist/
+serve:
+    zola serve
 
-clean:
-    rm -rf dist/
-
-watch-build:
-    watchexec -w src just build
-
-watch-server:
-    browser-sync start -ws dist
+build:
+    zola build
