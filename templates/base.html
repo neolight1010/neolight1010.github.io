@@ -15,15 +15,18 @@
         <h2>Menu</h2>
 
         <ul>
-          <li><a href="#">blog</a></li>
+          <li><a href="/">home</a></li>
+          <li><a href="/blog">blog</a></li>
           <li><a href="#">about me</a></li>
         </ul>
       </div>
     </div>
 
     <div class="middle-div">
+      <h1 class="middle-header koho-bold">{% block header %}{% endblock header %}</h1>
+
       {% block content %}
-      {% endblock %}
+      {% endblock content %}
     </div>
 
     <div class="right-div">

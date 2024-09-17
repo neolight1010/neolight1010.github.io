@@ -22,6 +22,7 @@ ul {
 .main-div {
   display: flex;
   column-gap: 1em;
+  justify-content: space-between;
 }
 
 /* --- */
@@ -46,11 +47,9 @@ ul {
 /* --- middle --- */
 
 .middle-div {
-  height: 20px;
-
   display: flex;
   flex-direction: column;
-
+  width: 100%;
   row-gap: 0.5em;
 }
 
