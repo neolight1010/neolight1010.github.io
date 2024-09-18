@@ -16,7 +16,7 @@
 
         <ul>
           <li><a href="/">home</a></li>
-          <li><a href="/blog">blog</a></li>
+          <li><a href="{{ get_url(path='@/blog/_index.md') }}">blog</a></li>
           <li><a href="#">about me</a></li>
         </ul>
       </div>
@@ -25,8 +25,10 @@
     <div class="middle-div">
       <h1 class="middle-header koho-bold">{% block header %}{% endblock header %}</h1>
 
-      {% block content %}
-      {% endblock content %}
+      <div class="middle-text">
+        {% block content %}
+        {% endblock content %}
+      </div>
     </div>
 
     <div class="right-div">

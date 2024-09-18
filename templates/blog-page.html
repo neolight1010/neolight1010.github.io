@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block header %}{{ page.title }}{% endblock header %}
+
+{% block content %}
+
+<p><strong>{{page.date}}</strong></p>
+
+{{ page.content | safe }}
+
+{% endblock content %}
