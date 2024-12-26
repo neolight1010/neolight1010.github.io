@@ -4,8 +4,10 @@
 
 {% block content %}
 
-<p><strong>{{page.date}}</strong></p>
+<div class="markdown-content">
+  <p class="blog-date"><strong>{{page.date}}</strong></p>
 
-{{ page.content | safe }}
+  {{ page.content | safe }}
+</div>
 
 {% endblock content %}
