@@ -80,6 +80,14 @@ ul {
   box-sizing: border-box;
   padding: 1em;
   border: 1px solid black;
+
+  img {
+    width: 100%;
+  }
+
+  p {
+    font-size: small;
+  }
 }
 
 /* --- markdown --- */
