@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>neolight1010's website</title>
-  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  <link href="{{ get_url(path="style.css", cachebust=true) }}" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
 
     <div class="right-div">
       <div class="right-img">
-        <img src="/maddie-square.jpg" />
+        <img src="{{ get_url(path="maddie-square.jpg") }}" />
         <p>maddie wishes you a great day!</p>
       </div>
     </div>
