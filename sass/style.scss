@@ -16,6 +16,12 @@ ul {
   margin: 0;
 }
 
+@mixin if-mobile() {
+  @media (max-width: 450px) {
+    @content;
+  }
+}
+
 
 /* --- */
 
@@ -23,12 +29,21 @@ ul {
   display: flex;
   column-gap: 1em;
   justify-content: space-between;
+
+  @include if-mobile() {
+    flex-direction: column;
+    row-gap: 1.5em;
+  }
 }
 
 /* --- left --- */
 
 .left-div {
   flex-basis: 30%;
+
+  @include if-mobile() {
+    order: 2;
+  }
 }
 
 .nav-menu {
@@ -51,6 +66,10 @@ ul {
   flex-direction: column;
   width: 100%;
   row-gap: 0.5em;
+
+  @include if-mobile() {
+    order: 1;
+  }
 }
 
 .middle-header {
@@ -73,6 +92,10 @@ ul {
 
 .right-div {
   flex-basis: 20%;
+
+  @include if-mobile() {
+    order: 3;
+  }
 }
 
 .right-img {
@@ -81,8 +104,14 @@ ul {
   padding: 1em;
   border: 1px solid black;
 
+  text-align: center;
+
   img {
     width: 100%;
+
+    @include if-mobile() {
+      width: 30%;
+    }
   }
 
   p {
