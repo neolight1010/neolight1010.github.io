@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>neolight1010's website</title>
+  <link href="https://neolight1010.github.io/style.css?h=487e94a226ac7ff14cf9" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+  <div class="main-div koho-regular">
+    <div class="left-div">
+      <div class="nav-menu">
+        <h2>Menu</h2>
+
+        <ul>
+          <li><a href="https://neolight1010.github.io">home</a></li>
+          <li><a href="https://neolight1010.github.io/blog/">blog</a></li>
+          <li><a href="https://neolight1010.github.io/about/">about me</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="middle-div">
+      <div class="middle-header koho-bold">
+        <h1>My first Haskell experience</h1>
+      </div>
+
+      <div class="middle-text">
+        
+
+<div class="markdown-content">
+  <p class="blog-date"><strong>2025-09-03</strong></p>
+
+  <p>The other day I was searching through my notes and found this half-complete blog. I wrote it multiple years ago, around 2021-2022, before I became a professional software developer. It was very enlightening (and amusing) to read this so many years later. So, I decided to release this after making some redaction adjustments. I also added some <em>retrospective notes</em> about things I find interesting now, so many years later.</p>
+<p>Take this as a "Professional programmer reads through his old student FP notes" blog. I hope you find it useful or amusing in any way!</p>
+<hr />
+<p>A few months ago, I heard about a programming language named <em>Haskell</em>, which was said to be <em>purely functional</em>. I didn't know much about functional programming at the time, so learning that a language is completely functional caught my attention.</p>
+<p>Since that day, I started learning Haskell through videos and exercises. The journey was so interesting that I decided to document my experience in this article. Some chapters consist of my personal understanding mechanisms of Haskell's fundamental concepts, while others are about my opinion of specific topics. Needless to say, this journal is subjective and I made it mainly to to consolidate my learning. I hope the reader finds this useful in any way :) .</p>
+<p>I want to say thanks to <a href="https://www.youtube.com/channel/UCof1BUiJk7llGSwjl8z27FA">James Hobson</a> for making his <a href="https://www.youtube.com/playlist?list=PLNLIbsKl8RYmu_NaSvpvj74MPy8qZSNd8">Haskell tutorial series</a>, which I used as my main learning resource throughout this journey.</p>
+<h1 id="0-prelude">0. Prelude</h1>
+<p>So I'm going to start out by telling you a bit about myself. As at the time of writing, I am a self-taught <em>hobbyist</em> developer in the process of becoming a <em>professional</em> self-taught developer, whatever that ("professional") means (*note: this was written around 2021-2022). Right now, I mostly use Python (Django) and Typescript, but I've also used most other popular languages, like C, C++ and Java. Also, I plan on investing a lot of time to learn Rust, as I've had a really good time using it.</p>
+<p>Before starting to learn Haskell, I had very little experience and knowledge about functional programming. To be honest, I didn't even understand what <em>imperative</em> programming really meant! I did know about some of the features of functional programming, though, like anonymous functions and immutability.</p>
+<p>So, why did I start learning Haskell? Well, a company I was interested in working at was hiring Haskell/functional programmers (which seemed weird to me, as Haskell is not even in the <a href="https://bootcamp.berkeley.edu/blog/most-in-demand-programming-languages/">top 10 most in-demand languages</a>). So, I decided to take on the challenge, and that led me to Youtube, where there were a lot of talks about how functional programming makes systems more stable and reliable. After watching some of those FP introductory talks, I decided it was time to get my hands dirty with some programming.</p>
+<h1 id="1-setup">1. Setup</h1>
+<p>The first video on Hobson's Haskell-tutorial series is about downloading and setting up the tools to work with Haskell. These include Cabal and GHC. So I went to <a href="https://www.haskell.org/">Haskell's website</a> and downloaded GHCup, which, in turn, installed Cabal, GHC and Stack. This reminded me of <a href="https://rustup.rs/">Rustup</a>, the official Rust toolchain installer,  so I was really happy that a similar tool existed for Haskell.</p>
+<p>At first, I tried to use Stack because of its "isolated GHC" feature (similar to virtual envs for Python), but it was kind of weird and decided to stick with Cabal.</p>
+<p>As recommended by Hobson, I typed <code>cabal v2-repl</code> to open the interactive mode, which is really nice and useful. At first, I was kind off annoyed to type <code>v2</code> before every Cabal command, but after a quick look at <code>cabal --help</code>, I noticed I can just use <code>cabal repl</code> for development and <code>cabal v2-repl</code> when I needed some back-compatibility features.</p>
+<p>After this, the next step was configuring my favorite editor, <a href="https://neovim.io/">NeoVim</a>, to work with Haskell. I use <a href="https://github.com/neoclide/coc.nvim">coc.nvim</a> as my auto-completion/IntelliSense plugin, so I was expecting to find a coc.nvim Haskell plugin or something similar that I could install easily with the <code>:CocInstall</code> command. Unfortunately, that was not the case. After searching in the coc.nvim docs, I found a <a href="https://github.com/neoclide/coc.nvim/wiki/Language-servers#haskell">config sample</a> that I could easily copy and paste into my <code>coc-settings.json</code> file. After doing that, autocompletion and formatting were working like a charm.</p>
+<p>With my environment ready, I dove into what makes Haskell special: everything is a function!</p>
+<h1 id="2-functions-functions-and-more-functions">2. Functions, functions and more functions</h1>
+<p>A <em>function</em>, in a mathematical sense, is a relationship that maps a value from a set <code>A</code> to a value from a set <code>B</code>. According to this definition, values from <code>A</code> must have <strong>only one</strong> value from <code>B</code> associated to them, so each time you apply the function on the same value, you get the same result (determinism).</p>
+<p>This notion of function is equally applied to <em>Haskell functions</em>, with the special feature that <strong>Haskell functions only take one parameter</strong>. This was the first <em>weird thing</em> that I had to understand about Haskell.</p>
+<blockquote>
+<p><em>retrospective note:</em> In reality, Haskell functions are not really deterministic. The point I was trying to make here is that functions calculate their result using the parameters they are given, as opposed to being able to access state in an effectful manner (e.g. global variables).</p>
+</blockquote>
+<p>So, let's take a simple <code>multiply</code> function written in C:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">multiply</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">a</span><span>, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">b</span><span>) {
+</span><span>  </span><span style="color:#b48ead;">return</span><span> a * b;
+</span><span>}
+</span></code></pre>
+<p>If we wanted to write a <code>double</code> function, using our previous <code>multiply</code> function, we could do:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">int double</span><span>(</span><span style="color:#b48ead;">int</span><span> a) {
+</span><span>  </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">multiply</span><span>(</span><span style="color:#d08770;">2</span><span>, a);
+</span><span>}
+</span></code></pre>
+<p>Makes sense, right? Now, let's do the same in Haskell:</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>multiply a b = a * b
+</span><span>double a = multiply </span><span style="color:#d08770;">2</span><span> a
+</span></code></pre>
+<p>It looks right, and <em>it works</em>! We have a (seemingly) pure two-parameter <code>multiply</code> function. But, remember what I said about Haskell functions: <em>they all take one parameter only</em>; so, what is going on here? Well, it turns out that the C <code>multiply</code> function is a function that maps <em>two <code>int</code>s</em> to another <code>int</code>, but the Haskell <code>multiply</code> function is a <strong>function that maps an <code>Int</code> to a function that maps an (I didn't make a mistake there) <code>Int</code> to another <code>Int</code></strong>. The type signature looks like <code>Int -&gt; Int -&gt; Int</code> (you can check any function's type signature using the <code>:t [function]</code> command from Cabal's REPL). What does this imply? Well, whereas in C, if you try to call <code>multiply</code> like <code>multiply(2)</code>, you get an error for not sending the right amount of parameters (2); in Haskell, however, <strong>you just get another function</strong>. So, just like that, you can define your <code>double</code> function as follows:</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>double = multiply </span><span style="color:#d08770;">2
+</span><span style="color:#65737e;">-- previous redundant version: double a = multiply 2 a
+</span></code></pre>
+<p>So, comparing our two Haskell <code>double</code> functions, <code>double a = multiply 2 a</code> and <code>double = multiply 2</code>, we notice the the former is <em>redundant</em>. And this is something that happened to me a lot in the following days, because I usually tried to use typical non-functional patterns that could be simplified using functional patterns. Thankfully, Haskell's language server is very good at detecting these redundancies and pointing them out, which greatly helped in my learning process.</p>
+<blockquote>
+<p><em>retrospective note:</em> Currying completely amazed me when I first learned it, as you can see from my writing. It soon became one of my favorite techniques to make my code more expressive and elegant.</p>
+</blockquote>
+<h1 id="3-side-observations">3. Side observations</h1>
+<p>Here are some other observations up to this point that I couldn't fit in the previous sections.</p>
+<ul>
+<li>Lists were really easy to grasp. In a sense, I found Haskell lists like a sort-of merge between C arrays and Python lists, in the way that they are homogeneous (every element must have the same type) but of variable length. Also, there are list comprehensions, really similar to Python's.</li>
+<li>Pattern matching is a really nice feature that allows to change a function's behavior depending on some boolean value. It also was easy to grasp, as it's similar to Rust's <code>match</code> and the new Python pattern matching feature..</li>
+</ul>
+<blockquote>
+<p><em>retrospective note:</em> I think it's interesting how I missed the "strangest" feature of Haskell's lists: they' linked lists!</p>
+</blockquote>
+<h1 id="4-recursion">4. Recursion</h1>
+<p>I decided to take a whole chapter on the topic of recursion, as it's one of the parts I most struggled with in Haskell.</p>
+<p>Recursion means <strong>defining a function in terms of itself</strong>. Quite a simple definition. When I first started learning programming it was a bit hard to understand, but then it became pretty intuitive. In most cases, I've learned to avoid recursion if possible, trying to convert recursive solutions to iterative ones. This is because common programming languages have a <em>maximum recursion depth</em>, which limits the amount of recursion you can do. Also, <a href="https://softwareengineering.stackexchange.com/questions/237883/is-recursive-code-slower-than-non-recursive-code">recursion is slower in some languages</a> and iteration often "feels more natural" to write in imperative languages.</p>
+<p>In Haskell, however, you don't have iteration. There are no <code>while</code> or <code>for</code> statements which you can use as naturally do in other languages. You only have recursion. And this is one of the most difficult things to grasp in Haskell and functional languages, as you might so used to imperative iterations that it is really hard to think about recursive solutions.</p>
+<p>But this is also one of the things <strong>I love</strong> about Haskell! It makes you think in ways you are not used to, which often leads to solutions that are more elegant and "fun", that you wouldn't have thought of when using imperative languages. And, recursion is really optimized in functional-programming languages, so you don't have to worry about the limitations I mentioned before.</p>
+<h1 id="5-weird-classes-foldable-functors-monads-monoids">5. Weird classes: Foldable, Functors, Monads, Monoids...</h1>
+<p>Now we get to an event stranger topic i(and even more fun!). Haskell, being a "mathematical" language, tries to abstract common programming elements/patterns into "classes" (typeclasses, not OOP classes) that you can "instantiate". This is also really difficult to understand at first, as these often have mathematical names and descriptions. Thankfully, the more basic (and elemental) classes are quite easy to understand, once you get over the vocabulary. I'll write my personal explanation of my favorite of the basic typeclasses next: Monoid and Monad.</p>
+<h2 id="monoid">Monoid</h2>
+<p>According to <a href="https://hackage.haskell.org/package/base-4.16.0.0/docs/Data-Monoid.html">Hackage</a>:</p>
+<blockquote>
+<p>A type <code>a</code> is a Monoid if it provides an associative function (<code>&lt;&gt;</code>) that lets you combine any two values of type <code>a</code> into one, and a neutral element (<code>mempty</code>) such that:
+<code>a &lt;&gt; mempty == mempty &lt;&gt; a == a</code></p>
+<p>A Monoid is a Semigroup with the added requirement of a neutral element. Thus any Monoid is a Semigroup, but not the other way around.</p>
+</blockquote>
+<p>Okay, so that explains it pretty well if you ignore the whole "Semigroup" part. But true understanding comes from practical application. For that purpose, let's derive our own Monoid using <code>Int</code> and the sum function <code>(+)</code>.</p>
+<h3 id="ints-can-be-monoids"><code>Int</code>s can be Monoids</h3>
+<p>From the description above, we get that we need two things: an "associative function" and a "neutral element". Let's suppose our associative function is an <code>Int</code> sum. You will notice that the neutral element of sum is 0, because if we add 0 to a number, we get the same number: <code>a + 0 = 0 + a = a</code>. That's exactly what is described in the Monoid definition! (<code>a &lt;&gt; mempty == mempty &lt;&gt; a == a</code>) So, that means we can define an <code>Int</code> as a Monoid whose neutral element is 0:</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">instance Monoid Int where
+</span><span>mempty = </span><span style="color:#d08770;">0
+</span><span>mappend = </span><span style="color:#8fa1b3;">(+)
+</span></code></pre>
+<p>This will give us an error, as <code>Int</code> must be an instance of Semigroup first (Semigroups are just Monoids without the neutral element). So let's define that:</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">instance Semigroup Int where
+</span><span style="color:#8fa1b3;">(&lt;&gt;) </span><span>= </span><span style="color:#8fa1b3;">(+)
+</span><span>
+</span><span style="color:#b48ead;">instance Monoid Int where
+</span><span>mempty = </span><span style="color:#d08770;">0
+</span></code></pre>
+<p>That's it! Now, if we run <code>(5 :: Int) &lt;&gt; (3 :: Int)</code>, it will return <code>8</code>, meaning we just defined a <code>Monoid</code> instance for <code>Int</code>.</p>
+<p>If we wanted to do this with multiplication, we would set <code>1</code> as the neutral element (<code>mempty</code>).</p>
+<p>Haskell is based upon these kinds of "<em>abstracions</em>" through typeclasses, making code simpler, more "generic", and elegant. A more practical example of how Monoids (and typeclasses in general) can be useful is in Tsoding's video "<a href="https://youtu.be/BovTQeDK7XI">How Monoids are useful in Programming?</a>". Just another example of how beautiful functional-programming is.</p>
+<h2 id="so-what-even-are-monads">So, what even are Monads?</h2>
+<p>Monads are perhaps the strangest concept in functional programming. In fact, I've noticed there's a recurring joke that states "Monads cannot be explained". Going back to the definition of Monoid in Hackage, we can say it was pretty self-explanatory even if you're not too used to mathematical language. By contrast, here is the <a href="https://hackage.haskell.org/package/base-4.16.0.0/docs/Control-Monad.html#t:Monad">definition for Monad in Hackage</a>:</p>
+<blockquote>
+<p>The Monad class defines the basic operations over a <em>monad</em>, a concept from a branch of mathematics known as <em>category theory</em>. From the perspective of a Haskell programmer, however, it is best to think of a monad as an <em>abstract datatype</em> of actions. Haskell's <code>do</code> expressions provide a convenient syntax for writing monadic expressions.</p>
+<p>Instances of Monad should saisfy the following:
+...</p>
+</blockquote>
+<p>From that snippet you can see how even Hackage doesn't bother trying to explain Monads. But this shouldn't be an issue in the long run, as, from what I've seen in some forums, you will eventually get used to Monads, even if you can't define them or explain them properly. So don't get discouraged if you don't understand Monads at first, as it is something most Haskell programmers have gone through.</p>
+<blockquote>
+<p><em>retrospective note:</em> On Hackage, Monads are defined purely through their behavior (functions), which makes them a bit "cryptic". However, since I wrote that paragraph, I learned a lot of useful analogies and metaphors that bring Monads back to the "real world". It's more a question of vocabulary and the "succintness" of some of the official documentation.</p>
+</blockquote>
+<blockquote>
+<p>At this point I got bored of writing and left the journal unfinished (^_^;).</p>
+</blockquote>
+<h1 id="retrospective">Retrospective</h1>
+<p>Reading this so many years after makes me notice how many things I take for granted nowadays. Say, the language setup section is a bit funny to me now, as I'm so used to installing and uninstalling languages that this is more of an afterthought.</p>
+<p>Recursiveness has also become much more intuitive to me now. In fact, I now lean to recursive solutions most of the time, when I'm not constrained by performance or stack sizes.</p>
+<p>You can also note, from my writing, the "awe" I felt when talking about the basic typeclasses. I understood them more in a "mathematical sense", just trying to ignore what I didn't understand and go along until I got to do it. And, now, I can happily say it worked! Through a lot of reading and learning from multiple sources, I now understand the basic typeclasses not only as simple "mathematical definitions", but as useful metaphors and analogies that help make code more reusable and elegant.</p>
+<p>In conclusion, it was very fun and insightful looking back to the past to see my learning process, especially of this paradigm that I truly feel completely changed the way I write code and see programming in general. It also leaves me as a lesson to write more often so I can do more exercises like this in the future :) .</p>
+<p>If you are starting your own FP journey, I encourage you to embrace the confusion and keep trying and learning until things start to "click". And why not keep a journal too? You might thank yourself later ;)</p>
+<p>Well, congrats on getting to the end of the article! Thank you for reading, I hope it was fun and somewhat productive! Keep learning!</p>
+
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="right-div">
+      <div class="right-img">
+        <img src="https://neolight1010.github.io/maddie-square.jpg" />
+        <p>maddie wishes you a great day!</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- TODO Add me: <img src="/neocities.png"> -->
+</body>
+
+</html>
