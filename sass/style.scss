@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-body {
+:root {
   background-color: white;
   color: black;
   font-family: Verdana;
+}
 
-  margin: 0;
-  padding: 1.5em 2em;
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 body p,
@@ -26,6 +30,9 @@ ul {
 /* --- */
 
 .main-div {
+  margin: 0;
+  padding: 1.5em 2em;
+
   display: flex;
   column-gap: 1em;
   justify-content: space-between;
@@ -119,6 +126,38 @@ ul {
 
   p {
     font-size: small;
+  }
+}
+
+/* --- banner --- */
+.updates-banner {
+  height: 2em;
+  width: 100%;
+  background: teal;
+
+  display: flex;
+  align-items: center;
+}
+
+.updates-banner p {
+  color: white;
+  animation: 10s linear 0s infinite running banner-slide-in;
+  letter-spacing: 0.3em;
+  width: auto;
+
+  font-family: Koho;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@keyframes banner-slide-in {
+  from {
+    translate: calc(100vw);
+  }
+
+  to {
+    translate: 0;
+    transform: translateX(-100%);
   }
 }
 
