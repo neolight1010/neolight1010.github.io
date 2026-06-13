@@ -49,10 +49,13 @@ ul {
 .nav-menu {
   padding: 0.6em 0.8em 1em 0.8em;
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .nav-menu ul {
-  padding-left: 1.5em;
+  padding-left: 8px;
 }
 
 .nav-menu li {
