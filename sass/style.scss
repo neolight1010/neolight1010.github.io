@@ -4,6 +4,8 @@
   background-color: white;
   color: black;
   font-family: Verdana;
+
+  overflow:hidden;
 }
 
 body {
@@ -139,15 +141,28 @@ ul {
   align-items: center;
 }
 
-.updates-banner p {
+.updates-banner p,span {
   color: white;
-  animation: 10s linear 0s infinite running banner-slide-in;
   letter-spacing: 0.3em;
   width: auto;
 
   font-family: Koho;
   font-weight: 600;
+}
+.updates-banner p {
   text-decoration: underline;
+}
+
+.updates-banner span {
+  animation: bounce 1.5s ease infinite;
+}
+
+.updates-banner > div {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+
+  animation: 10s linear 0s infinite running banner-slide-in;
 }
 
 @keyframes banner-slide-in {
@@ -159,6 +174,12 @@ ul {
     translate: 0;
     transform: translateX(-100%);
   }
+}
+
+@keyframes bounce {
+    60% { transform:translateY(0%); }
+    80% { transform:translateY(-15%); }
+    90% { transform:translateY(0%); }
 }
 
 /* --- markdown --- */
