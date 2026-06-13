@@ -13,4 +13,10 @@
 <p>
   Page under continuous construction :)
 </p>
+
+{% set blogs = get_section(path="blog/_index.md") %}
+{% set latest_post = blogs.pages | sort(attribute="date") | last %}
+
+Latest blog: {{ latest_post.title }} - {{ latest_post.date }}
+
 {% endblock %}
